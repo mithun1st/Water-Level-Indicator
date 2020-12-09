@@ -10,7 +10,7 @@ const byte tslow=20,tsfull=100;
 const byte empty=9, low=20, medium=50,normal=93;
 
 //how many num of beep sound & set refreshrate
-const byte beep=5,refreshRate=1000;
+const byte beep=7,refreshRate=1000;
 
 
 int va;
@@ -116,7 +116,7 @@ void setup(){
   pinMode(b,OUTPUT);
 
   //
-  //pinMode(A0,INPUT);
+  pinMode(A0,INPUT);
   //
  
   lcd.begin(16,2);
@@ -154,10 +154,10 @@ void setup(){
 
 void loop(){
   //
-  //va=map(analogRead(A0), 0,1018,0,100);
+  va=map(analogRead(A0), 0,1018,0,100);
   //
   
-  va =sonic();
+  //va =sonic();
   va = map(va, tsfull, tslow, 0, 100);
   if(va>100){
     va=100;
@@ -188,7 +188,7 @@ void loop(){
     lcd.write(6);
   }
   else if(va>empty){
-    rgb(0,0,1);
+    rgb(1,1,0);
     lcd.setCursor(0,0);
     lcd.print(" Tank:  Low   ");
     lcd.write(7);
@@ -265,11 +265,11 @@ void warf(int d){
   for (int i=0;i<d;i++){
     rgb(0,1,1);
     digitalWrite(buz,1);
-    delay(500);
+    delay(300);
     rgb(0,0,0);
     digitalWrite(buz,0);
     lcd.noDisplay();
-    delay(500);
+    delay(300);
     lcd.display();
   }
 }
